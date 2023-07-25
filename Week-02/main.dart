@@ -75,6 +75,27 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+     body: Column(
+      children: [
+                Text(
+                  "Hello Flutter Developers",
+                  style: TextStyle(
+                      color: Colors.purple, fontStyle: FontStyle.italic),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Click me?"),
+                ),
+                OutlinedButton(
+                  onPressed: () {},
+                  child: Text("Click me?"),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("Click me?"),
+                ),
+      ],
+     ),
     );
   }
 }
