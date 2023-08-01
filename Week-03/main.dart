@@ -86,13 +86,24 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      print("Elevated Button Clicked.");
-                    },
-                    child: Text("Elevated"),
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.cyanAccent),
-                    )
+                      onPressed: () => print("Elevated Button Clicked."),
+                      child: Text("Elevated Button"),
+                  ),
+                  OutlinedButton(
+                    onPressed: () => print("Outlined Button Clicked."),
+                    child: Text("Outlined Button"),
+                  ),
+                  TextButton(
+                    onPressed: () => print("Text Button Clicked."),
+                    child: Text("Text Button"),
+                  ),
+                  FilledButton(
+                    onPressed: () => print("Filled Button Clicked."),
+                    child: Text("Filled Button"),
+                  ),
+                  FilledButton.tonal(
+                    onPressed: () => print("Filled Button Tonal Clicked."),
+                    child: Text("Filled Button Tonal"),
                   ),
                   Image.network("https://th.bing.com/th/id/R.8e2c571ff125b3531705198a15d3103c?rik=ZS6L%2fgS20ouPXA&pid=ImgRaw&r=0"),
                   Card(
