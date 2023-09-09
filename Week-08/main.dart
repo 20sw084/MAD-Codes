@@ -7,6 +7,11 @@ void main() {
   runApp(const MyApp());
 }
 
+// any service available over web is web server.
+// method to access web service is via apis.
+// URI: Uniform resource identifier
+// parse string to URI. (http.get(Uri,parse("some URL")))
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
