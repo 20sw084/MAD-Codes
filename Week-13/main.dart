@@ -4,7 +4,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 void main() {
   runApp(const MyApp());
 }
-// AIzaSyDqIKgp0PFBw8Yp-SlXh1_8YABQ4Jd3Km
+
+// add this in androidManifest.xml(after line 5)
+        // <meta-data android:name="com.google.android.geo.API_KEY"
+        //     android:value="AIzaSyDqIKgp0PFBw8Yp-SlXh1_8YABQ4Jd3Km"/>
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
