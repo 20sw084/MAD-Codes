@@ -23,9 +23,17 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
-  Future<String> getDataViaFuture() async{
-    await Future.delayed(const Duration(seconds: 5,),);
-    return "Greetings";
+  // Future<String> getDataViaFuture() async{
+  //   await Future.delayed(const Duration(seconds: 5,),);
+  //   return "Greetings";
+  // }
+
+  Future getDataViaFuture() async{
+    while(true){
+      await Future.delayed(const Duration(seconds: 1,),);
+      final date = DateTime.now();
+      return '${date.hour}:${date.minute}:${date.second} From FutureBuilder' ;
+    }
   }
 
   Stream<String> getDataViaStream() async* {
