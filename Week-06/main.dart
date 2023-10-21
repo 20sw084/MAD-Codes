@@ -28,76 +28,96 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   double _scale = 1.0;
-  double _previousScale = 1.0;
+  // double _prevousScale = 1.0;
   Offset offset = const Offset(0.0, 0.0);
   @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     body: GestureDetector(
-  //       onPanUpdate: (details) {
-  //         setState(() {
-  //           offset = Offset(
-  //               offset.dx + details.delta.dx, offset.dy + details.delta.dy); //
-  //         });
-  //       },
-  //       child: Center(
-  //         child: Transform.translate(
-  //           offset: offset,
-  //           child: Container(
-  //             height: 300,
-  //             width: 300,
-  //             color: Colors.blue,
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text("Gestures"),
       ),
       body: Center(
-        child: GestureDetector(
-          // onTap: () {
-          //   log("onTap");
-          // },
-          // onDoubleTap: () {
-          //   log("onDoubleTap");
-          // },
-          // onLongPress: () {
-          //   log("onLongPress");
-          // },
-          // onVerticalDragUpdate: (details) {
-          //   print('onVerticalDragUpdate: ${details.localPosition.dy}');
-          // },
-          onScaleStart: (details) {
-            _previousScale = _scale;
-          },
-          // onScaleUpdate: (details) {
-          //   setState(() {
-          //     _scale = _previousScale * details.scale;
-          //   });
-          //   print('onScaleUpdate: $_scale');
-          // },
-          onScaleUpdate: (details) {
-            setState(() {
-              _scale = details.scale;
-            });
-          },
-          // onScaleEnd: (details) {
-          //   setState(() {
-          //     _scale = 1.0;
-          //   }); //Return to the original size
-          // },
-          child: Center(
-            child: Transform.scale(
-              scale: _scale,
-              child: Container(height: 300, width: 300, color: Colors.blue),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            GestureDetector(
+              onTap: () {
+                print("Just Tapped");
+              },
+              onDoubleTap: () {
+                print("Double Tapped");
+              },
+              onLongPress: () {
+                print("Long Pressed");
+              },
+              onVerticalDragUpdate: (details){
+                print(details.localPosition.dy);
+              },
+              child: Container(
+                height: 200,
+                width: 200,
+                color: Colors.grey,
+                child: Center(
+                  child: Text(
+                    'Tap me.',
+                  ),
+                ),
+              ),
             ),
-          ),
+            GestureDetector(
+              // Optional Method for pinching
+              // onScaleStart: (details) {
+              //   _prevousScale = _scale;
+              // },
+              onScaleUpdate: (details) {
+                setState(() {
+                  _scale = details.scale;
+                });
+              },
+              // Optional Method
+              // onScaleEnd: (details) {
+              //   setState(() {
+              //     _scale = 1.0;
+              //   });
+              // },
+              child: Transform.scale(
+                scale: _scale,
+                child: Container(
+                  height: 200,
+                  width: 200,
+                  color: Colors.blueGrey,
+                  child: const Center(
+                    child: Text(
+                      'Zoom me.',
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onPanUpdate: (details) {
+                setState(() {
+                  offset = Offset(offset.dx + details.delta.dx,
+                      offset.dy + details.delta.dy); //
+                });
+              },
+              child: Center(
+                child: Transform.translate(
+                  offset: offset,
+                  child: Container(
+                    height: 200,
+                    width: 200,
+                    color: Colors.cyanAccent,
+                    child: const Center(
+                      child: Text(
+                        'Hold me.',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
