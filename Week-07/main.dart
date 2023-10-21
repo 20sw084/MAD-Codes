@@ -16,24 +16,22 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key});
 
-  final String title;
+  Future<String> getDataViaFuture() async{
+    await Future.delayed(const Duration(seconds: 5,),);
+    return "Greetings";
+  }
 
-  // Future<String> getData() async{
-  //   await Future.delayed(Duration(seconds: 5,),);
-  //   return "Greetings";
-  // }
-
-  Stream<String> getData() async* {
+  Stream<String> getDataViaStream() async* {
     while(true){
-      await Future.delayed(Duration(seconds: 1,),);
+      await Future.delayed(const Duration(seconds: 1,),);
       DateTime dt = DateTime.now();
       yield "${dt.hour}:${dt.minute}:${dt.second}";
     }
@@ -43,27 +41,15 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
+        title: const Text('Asynchronous Programming'),
       ),
       body: Center(
-        // child: FutureBuilder(
-        //   future: getData(),
-        //   builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        //     if(snapshot.connectionState == ConnectionState.waiting){
-        //       return CircularProgressIndicator();
-        //     }
-        //     else if(snapshot.hasError){
-        //       return Text("Error is : ${snapshot.error}");
-        //     }
-        //     else{
-        //       return Text("${snapshot.data}");
-        //     }
-        //   },
-        // ), 
-        child: StreamBuilder(
-          stream: getData(),
-          builder: (BuildContext context, AsyncSnapshot snapshot){
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            FutureBuilder(
+              future: getDataViaFuture(),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if(snapshot.connectionState == ConnectionState.waiting){
                   return CircularProgressIndicator();
                 }
@@ -73,7 +59,21 @@ class MyHomePage extends StatelessWidget {
                 else{
                   return Text("${snapshot.data}");
                 }
-          },
+              },
+            ),
+            StreamBuilder(
+              stream: getDataViaStream(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text("Error is : ${snapshot.error}");
+                } else {
+                  return Text("${snapshot.data}");
+                }
+              },
+            ),
+          ],
         ),
       ),
     );
